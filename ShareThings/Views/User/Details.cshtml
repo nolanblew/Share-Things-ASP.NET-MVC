@@ -1,0 +1,78 @@
+﻿@model ShareThings.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>User</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.password)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.password)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.reputation)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.reputation)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Location.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Location.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.isFlagged)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.isFlagged)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.isDisabled)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.isDisabled)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.isAdmin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.isAdmin)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.isDeleted)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.isDeleted)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

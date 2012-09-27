@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ShareThings.Models.Category>
+
+@{
+    ViewBag.Title = "Viewing Categories";
+}
+
+<h2>Categories</h2>
+
+<p>
+    @Html.ActionLink("Create New Category", "Create")
+</p>
+<table class="displayThings">
+    <tr>
+        <th>Name
+        </th>
+        <th>Description
+        </th>
+        <th>Parent Category
+        </th>
+        <th>Visible To The Public
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @{
+        if (item.parent_id != -1)
+        {
+            ShareThings.Models.ShareStuffEntities db = new ShareThings.Models.ShareStuffEntities();
+            ShareThings.Models.Category cat = db.Categories.SingleOrDefault(c => c.id == item.parent_id);
+            if (cat != null)
+            {
+                    @cat.name
+            }
+            else
+            {
+                    @:<div style="font-style: italic; color: red;">The Parent Category No Longer Exists</div>
+            }
+        }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isPublic)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Share Things Home Panel";
+}
+
+<h2>Home Panel</h2>
+
+<div>
+    <h3>Recent requests in your location</h3>
+    @if (ViewBag.Filter == "local")
+    {
+        @Html.ActionLink("All Requests", "Panel", new { @filter = "all" });
+    }
+    else
+    {
+        @Html.ActionLink("Local Requests", "Panel", new { @filter = "local" });
+    }
+
+
+    @{
+        ShareThings.Models.Request[] requests = ViewBag.RequestList;
+
+        //Show all the requests for the area
+        foreach (ShareThings.Models.Request request in requests)
+        {
+        <div class="requestItem">
+            <b>@if(request.itemWant == "") {
+                   @request.Item.name;
+            } else {
+                   @request.itemWant;
+            }
+            </b>
+            <table>
+                <tr>
+                    <th>Location:</th>
+                    <td>@request.Location.name</td>
+                </tr>
+                <tr>
+                    <th>Needed by:</th>
+                    <td>@request.dateRequested.ToShortDateString()</td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td><input type="button" value="I Can Help!" /></td>
+                </tr>
+            </table>
+        </div>
+        }
+    }
+
+</div>

@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShareThings", "ShareThings\ShareThings.csproj", "{2265DD71-5A75-46B0-A683-FCECD8B0375C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShareThings.Tests", "ShareThings.Tests\ShareThings.Tests.csproj", "{77E52980-3767-4D58-8529-499C9CE1BB75}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccLocalPath0 = .
+		SccLocalPath1 = ShareThings.Tests
+		SccLocalPath2 = ShareThings
+		SccNumberOfProjects = 3
+		SccProjectName1 = ShareThings.Tests
+		SccProjectName2 = ShareThings
+		SccProjectUniqueName1 = ShareThings.Tests\\ShareThings.Tests.csproj
+		SccProjectUniqueName2 = ShareThings\\ShareThings.csproj
+		SccTeamFoundationServer = https://stratsofttech.tfspreview.com/defaultcollection
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2265DD71-5A75-46B0-A683-FCECD8B0375C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2265DD71-5A75-46B0-A683-FCECD8B0375C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2265DD71-5A75-46B0-A683-FCECD8B0375C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2265DD71-5A75-46B0-A683-FCECD8B0375C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77E52980-3767-4D58-8529-499C9CE1BB75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77E52980-3767-4D58-8529-499C9CE1BB75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77E52980-3767-4D58-8529-499C9CE1BB75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77E52980-3767-4D58-8529-499C9CE1BB75}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

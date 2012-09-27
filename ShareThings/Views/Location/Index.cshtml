@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ShareThings.Models.Location>
+
+@{
+    ViewBag.Title = "Locations";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New Location", "Create")
+</p>
+<table class="displayThings">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Max Users
+        </th>
+        <th>
+            Max Transactions
+        </th>
+        <th>
+            Public
+        </th>
+        <th>
+            Location Code
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.maxUsers)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.maxTransactions)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isPublic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.locationCode)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

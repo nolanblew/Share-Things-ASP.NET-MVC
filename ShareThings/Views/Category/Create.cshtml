@@ -1,0 +1,79 @@
+﻿@model ShareThings.Models.Category
+
+@{
+    ViewBag.Title = "Create Category";
+}
+
+<h2>Create Category</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Category</legend>
+
+        <div class="editor-label">
+            Category Name
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.name, new { @class = "txtInput" })
+            @Html.ValidationMessageFor(model => model.name)
+        </div>
+
+        <div class="editor-label">
+            Description
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.description, new { @class = "txtInput", @rows = "3" })
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <div class="editor-label">
+            Category Is Visible To Public
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.isPublic)
+            @Html.ValidationMessageFor(model => model.isPublic)
+        </div>
+
+        <div class="editor-label">
+            Parent Category (if this is a sub-category)
+        </div>
+        <div class="editor-field">
+            @{
+    ShareThings.Models.Category[] cat = ViewBag.TopCategories;
+    List<SelectListItem> items = new List<SelectListItem>();
+    items.Add(new SelectListItem()
+    {
+        Text = "<No Parent Category>",
+        Value = "-1"
+    });
+    foreach (ShareThings.Models.Category c in cat)
+    {
+        items.Add(new SelectListItem()
+        {
+            Text = c.name,
+            Value = c.id.ToString()
+        });
+    }
+
+             @Html.DropDownListFor(model => model.parent_id, items, new { @class = "ddlInput", @checked = "checked" });
+            }
+
+            @Html.ValidationMessageFor(model => model.parent_id)
+        </div>
+
+        <p>
+            <input type="submit" value="Create Category" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

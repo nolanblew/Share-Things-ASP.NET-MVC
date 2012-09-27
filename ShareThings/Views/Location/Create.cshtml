@@ -1,0 +1,83 @@
+﻿@model ShareThings.Models.Location
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Location</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.name)
+            @Html.ValidationMessageFor(model => model.name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.description)
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.maxUsers)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.maxUsers)
+            @Html.ValidationMessageFor(model => model.maxUsers)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.maxTransactions)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.maxTransactions)
+            @Html.ValidationMessageFor(model => model.maxTransactions)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.isPublic)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.isPublic)
+            @Html.ValidationMessageFor(model => model.isPublic)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.locationCode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.locationCode)
+            @Html.ValidationMessageFor(model => model.locationCode)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.isEnabled)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.isEnabled)
+            @Html.ValidationMessageFor(model => model.isEnabled)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

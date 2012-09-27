@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ShareThings.Models.Item>
+
+@{
+    ViewBag.Title = "My Items";
+}
+
+<h2>My Items</h2>
+
+<p>
+    @Html.ActionLink("Create New Item", "Create")
+</p>
+<table class="displayThings">
+    <tr>
+        <th>
+            Item Title
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Condition
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Visible to the Public
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.condition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isPublic)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

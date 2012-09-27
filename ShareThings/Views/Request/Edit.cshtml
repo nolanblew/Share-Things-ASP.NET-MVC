@@ -1,0 +1,125 @@
+﻿@model ShareThings.Models.Request
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Request</legend>
+
+        @Html.HiddenFor(model => model.id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.requestor_id, "User")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("requestor_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.requestor_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.item_id, "Item")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("item_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.item_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.itemWant)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.itemWant)
+            @Html.ValidationMessageFor(model => model.itemWant)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.isAccepted)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.isAccepted)
+            @Html.ValidationMessageFor(model => model.isAccepted)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.location_id, "Location")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("location_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.location_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.isCheckedOut)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.isCheckedOut)
+            @Html.ValidationMessageFor(model => model.isCheckedOut)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dateRequested)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.dateRequested)
+            @Html.ValidationMessageFor(model => model.dateRequested)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dateRecieved)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.dateRecieved)
+            @Html.ValidationMessageFor(model => model.dateRecieved)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dateReturned)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.dateReturned)
+            @Html.ValidationMessageFor(model => model.dateReturned)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dateWantedReturn)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.dateWantedReturn)
+            @Html.ValidationMessageFor(model => model.dateWantedReturn)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.giverRating)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.giverRating)
+            @Html.ValidationMessageFor(model => model.giverRating)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.recieverRating)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.recieverRating)
+            @Html.ValidationMessageFor(model => model.recieverRating)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

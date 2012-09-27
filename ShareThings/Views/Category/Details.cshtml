@@ -1,0 +1,50 @@
+﻿@model ShareThings.Models.Category
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Category</legend>
+
+    <div class="display-label">
+        Category Name
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+
+    <div class="display-label">
+        Description
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.description)
+    </div>
+
+    <div class="display-label">
+        Visible To The Public
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.isPublic)
+    </div>
+
+    @{
+        if (Model.parent_id != -1)
+        {
+    
+        <div class="display-label">
+            Parent Class
+        </div>
+    
+        <div class="display-field">
+            @ViewBag.ParentCategoryName
+        </div>
+        }        
+    }
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

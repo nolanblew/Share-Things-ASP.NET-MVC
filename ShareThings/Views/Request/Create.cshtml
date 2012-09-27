@@ -1,0 +1,224 @@
+﻿@model ShareThings.Models.Request
+@{
+    ViewBag.Title = "Create";
+}
+
+<style type="text/css">
+    #autocomplete-title {
+        font-weight: bold;
+    }
+
+    #autocomplete-picture {
+    }
+
+    #autocomplete-condition {
+        font-style: italic;
+        font-size: 12px;
+    }
+
+    #autocomplete-description {
+        font-size: 10px;
+    }
+</style>
+
+<script type="text/javascript">
+    function onSearchClick() {
+        var s = document.getElementById("txtSearch");
+        if (s.value == "Search Items") {
+            s.style.color = "#000000";
+            s.style.fontStyle = "normal";
+            s.value = "";
+            s.focus();
+        }
+    }
+
+    function onSearchLeave() {
+        var s = document.getElementById("txtSearch");
+        if (s.value == "") {
+            s.style.color = "#bce3ff";
+            s.style.fontStyle = "italic";
+            s.value = "Search Items";
+        }
+        else if (s.value == "Search Items") {
+            s.style.color = "#000000";
+            s.style.fontStyle = "normal";
+            s.value = "";
+            s.focus();
+
+        }
+    }
+</script>
+
+<h2>New Request</h2>
+
+<i>Have something you need to borrow? Just say what, when and where and maybe someone will find it for you!</i>
+
+
+
+<h2>Create New Request</h2>
+<i>Do you need something? Fill out when where and why and we'll hook you up!</i><br />
+<br />
+<label>Location</label><br />
+<select id="ddlLocation" class="ddlInput">
+    @{
+        List<ShareThings.Models.Location> locs = ViewBag.Locations;
+        foreach (ShareThings.Models.Location loc in locs)
+        {
+        <option value="@loc.id">@loc.name</option>    
+        }
+            
+    }
+</select>
+<br />
+<br />
+<input type="text" id="txtSearch" value="Search Items" class="txtInput" style="color: #bce3ff; font-style: italic;" onfocus="onSearchClick()" onblur="onSearchLeave()" />
+<br />
+<br />
+<span>--OR--</span>
+<br />
+<br />
+<label>Category</label><br />
+<select id="ddlCategory" class="ddlInput">
+    @{
+        List<ShareThings.Models.Category> cat = ViewBag.TopCategories;
+        foreach (ShareThings.Models.Category c in cat)
+        {
+        <option value="@c.id">@c.name</option>    
+        }
+    }
+</select>
+<br />
+
+<label>Sub-Category</label><br />
+<select id="ddlSubcategory" class="ddlInput">
+    <option>Test</option>
+</select>
+<br />
+<br />
+<div id="results">
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript">
+
+    $(function () {
+        $('#ddlCategory').change(function () {
+            var parentID = $('#ddlCategory').attr("value");
+            $.getJSON("getSubCategory/?parentID=" + parentID, null, function (data) {
+                $("#ddlSubcategory").fillSelect(data);
+            });
+        });
+
+
+        $.fn.fillSelect = function (data) {
+            $(this).empty();
+            var dta = this;
+            $.each(data, function (index, optionData) {
+                $(dta).append(
+                    $("<option value='" + optionData.Value + "'>" + optionData.Text + "</option>")
+                );
+            });
+        };
+
+        $.fn.addRequestItem = function (item) {
+            $(this).append("<b>" + item.name + "</b>");
+            $(this).append("<table>");
+            $(this).append("<tr><th>Location:</th><td>--</td></tr>");
+            $(this).append("<tr><th>Category:</th><td>--</td></tr>");
+            $(this).append("<tr><th>Condition:</th><td>" + item.condition + "</td></tr>");
+        }
+
+        // ------------------- SCRIPT FOR SEARCH --------------
+        var testItems = [
+            {
+                value: "1",
+                name: "Test Item",
+                desc: "This is a Test Item",
+                condition: "New"
+            },
+            {
+                value: "2",
+                name: "Dirty Socks",
+                desc: "Socks that have been worn before",
+                condition: "Used"
+            },
+            {
+                value: "3",
+                name: "Pizza",
+                desc: "Pizza Food Item",
+                condition: "New"
+            }
+        ];
+
+        $('#txtSearch').autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "searchItems",
+                    type: "POST",
+                    dataType: "json",
+                    data: { location: $("#ddlLocation").attr("value"), search: $("#txtSearch").attr("value") },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { name: item.name, value: item.name, id: item.id, desc: item.description, condition: item.condition }
+                        }))
+                    }
+                });
+            },
+            minLength: 0,
+            focus: function (event, ui) {
+                $("#txtSearch").val(ui.item.name);
+                return false;
+            },
+            select: function (event, ui) {
+                $("#txtSearch").val(ui.item.name);
+                return false;
+            }
+        })
+        .data("autocomplete")._renderItem = function (ul, item) {
+            return $("<li></li>")
+                .data("item.autocomplete", item)
+                .append("<a><table><tr><td id='autocomplete-title'>" + item.name + "</td><td id='autocomplete-conditino'>(" + item.condition + ")</td></tr>" +
+                "<tr><td colspan=2 id='autocomplete-description'>" + item.desc + "</td></tr></table></a>")
+                .appendTo(ul);
+        };
+
+
+        // -------------------------- CATEGORY SEARCH -----------------------------------------
+        $("#ddlSubcategory").change(function () {
+            var varLocation = $("#ddlLocation").attr("value");
+            var varCategory = $("#ddlSubcategory").attr("value");
+            if (varCategory == "-1") {
+                varCategory = $("ddlCategory").attr("value");
+            }
+            var inputData = {
+
+                location: varLocation,
+                category: varCategory
+            };
+            $.getJSON("getRequestByCategories", inputData, function (data) {
+                $("#results").empty();
+                $.each(data, function (index, dta) {
+                    $("#results").append(
+                        "<div class='requestItem'><b>" + dta.name + "</b><br/>" +
+                        "<table><tr><th>Description: </th><td>" + dta.description + "</td></tr>" +
+                        "<tr><th>Condition: </th><td>" + dta.condition + "</td></tr>" +
+                        "<tr><th>Details: </th><td>" + dta.details + "</td></tr>" +
+                        "</table><br><form action='create?itm=" + dta.id + "' method='post'>" +
+                        "<input type='hidden' id='itm' value='" + dta.id + "' />" +
+                        "<input type='submit' value='Request This!' /></form></div>");
+                });
+            });
+        });
+
+    });
+
+
+</script>

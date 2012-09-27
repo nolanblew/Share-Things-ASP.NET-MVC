@@ -1,0 +1,54 @@
+﻿<div class="headMenu">
+    @{
+        if (ShareThings.Content.SessionThings.IsInAdminPanel)
+        {
+            
+        <span class="headMenuItem">@Html.ActionLink("Users", "Index", "User")
+        </span>
+        <span class="headMenuItem">@Html.ActionLink("Locations", "Index", "Location")
+        </span>
+        
+        <span class="headMenuItem">@Html.ActionLink("Categories", "Index", "Category")
+        </span>
+        <span class="headMenuItem">@Html.ActionLink("Home", "Panel", "Home")
+        </span>
+        }
+        else
+        {
+            if (ShareThings.Content.SessionThings.UserLoggedIn())
+            {
+        
+        <span class="headMenuItem">@Html.ActionLink("Home Panel", "Panel", "Home")</span>
+        <span class="headMenuItem">@Html.ActionLink("My Requests", "Index", "Request") 
+            @{
+                string str = "";
+                ShareThings.Models.ShareStuffEntities db = new ShareThings.Models.ShareStuffEntities();
+                List<ShareThings.Models.Request> requests = db.Requests.Where(r => r.Item.owner_id == ShareThings.Content.SessionThings.LoggedInUser.id && r.isAccepted == false && r.isCheckedOut == false).ToList();   
+                if (requests.Count > 0){
+                    str = "(" + requests.Count + ")";
+                }
+            }
+            @str
+        </span>
+        <span class="headMenuItem">@Html.ActionLink("My Items", "Index", "Item")</span>
+        
+                if (ShareThings.Content.SessionThings.IsUserAdmin)
+                {
+        <span class="headMenuItem">@Html.ActionLink("Admin", "Index", "User")</span>
+                }
+            }
+        }
+    }
+    @{
+        
+        if (ShareThings.Content.SessionThings.UserLoggedIn())
+        {
+        <span class="headMenuItem">@Html.ActionLink("Logout", "Logout", "User")</span>
+        }
+        else
+        {
+        <span class="headMenuItem">@Html.ActionLink("Login", "Login", "User")</span>
+
+        }
+    }
+</div>

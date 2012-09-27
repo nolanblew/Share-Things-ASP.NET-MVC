@@ -1,0 +1,36 @@
+﻿@model ShareThings.Models.User
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<i>Login to ShareThings!</i>
+
+<br />
+<br />
+
+@using (Html.BeginForm((string)ViewBag.redirectTo))
+{
+    @Html.ValidationSummary(true)
+
+    <br />
+    <div class="form">
+
+        @Html.LabelFor(m => m.email, "Email")<br />
+        @Html.TextBoxFor(m => m.email, new { @class = "txtInput", @required = "true" })<br />
+        <br />
+
+        @Html.LabelFor(m => m.password, "Password")<br />
+        @Html.PasswordFor(m => m.password, new { @class = "txtInput", @required = "true" })<br />
+        <br />
+
+        <input type="submit" value="Login" /><br />
+        <br /><br />
+
+        Dont' have an account? Click @Html.ActionLink("here", "Register") to make a free account!
+
+    </div>
+    
+}

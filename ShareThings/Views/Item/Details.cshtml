@@ -1,0 +1,56 @@
+﻿@model ShareThings.Models.Item
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details for @Model.name</h2>
+
+@if (ShareThings.Content.SessionThings.IsUserAdmin)
+{
+    <div class="display-label">
+        User Email Address
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User.email)
+    </div>
+}
+
+<div class="display-label">
+    Item Name
+</div>
+<div class="display-field">
+    @Html.DisplayFor(model => model.name)
+</div>
+
+<div class="display-label">
+    Description
+</div>
+<div class="display-field">
+    @Html.DisplayFor(model => model.description)
+</div>
+
+<div class="display-label">
+    Condition
+</div>
+<div class="display-field">
+    @Html.DisplayFor(model => model.condition)
+</div>
+
+<div class="display-label">
+    Details of Condition
+</div>
+<div class="display-field">
+    @Html.DisplayFor(model => model.detail)
+</div>
+
+<div class="display-label">
+    Visible to the Public
+</div>
+<div class="display-field">
+    @Html.DisplayFor(model => model.isPublic)
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

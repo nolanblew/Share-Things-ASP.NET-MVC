@@ -1,0 +1,421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ShareStuffModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ShareStuffModelStoreContainer">
+          <EntitySet Name="Categories" EntityType="ShareStuffModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Items" EntityType="ShareStuffModel.Store.Items" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Locations" EntityType="ShareStuffModel.Store.Locations" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Requests" EntityType="ShareStuffModel.Store.Requests" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="ShareStuffModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="ShareStuffModel.Store.Users" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="description" Type="varchar" MaxLength="200" />
+          <Property Name="isPublic" Type="bit" Nullable="false" />
+          <Property Name="parent_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="owner_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="description" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="condition" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="detail" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="isPublic" Type="bit" Nullable="false" />
+          <Property Name="category_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="description" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="maxUsers" Type="int" Nullable="false" />
+          <Property Name="maxTransactions" Type="int" Nullable="false" />
+          <Property Name="isPublic" Type="bit" Nullable="false" />
+          <Property Name="locationCode" Type="varchar" MaxLength="5" />
+          <Property Name="isEnabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Requests">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="requestor_id" Type="int" Nullable="false" />
+          <Property Name="item_id" Type="int" Nullable="false" />
+          <Property Name="itemWant" Type="varchar" MaxLength="50" />
+          <Property Name="isAccepted" Type="bit" Nullable="false" />
+          <Property Name="location_id" Type="int" Nullable="false" />
+          <Property Name="isCheckedOut" Type="bit" Nullable="false" />
+          <Property Name="dateRequested" Type="datetime" Nullable="false" />
+          <Property Name="dateRecieved" Type="datetime" Nullable="false" />
+          <Property Name="dateReturned" Type="datetime" Nullable="false" />
+          <Property Name="dateWantedReturn" Type="datetime" Nullable="false" />
+          <Property Name="giverRating" Type="int" Nullable="false" />
+          <Property Name="recieverRating" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="password" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="reputation" Type="int" Nullable="false" />
+          <Property Name="location_id" Type="int" Nullable="false" />
+          <Property Name="isFlagged" Type="bit" Nullable="false" />
+          <Property Name="isDisabled" Type="bit" Nullable="false" />
+          <Property Name="isAdmin" Type="bit" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <Function Name="usrCheckLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ShareStuffModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ShareStuffEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Items" EntityType="ShareStuffModel.Item" />
+          <EntitySet Name="Locations" EntityType="ShareStuffModel.Location" />
+          <EntitySet Name="Requests" EntityType="ShareStuffModel.Request" />
+          <EntitySet Name="sysdiagrams" EntityType="ShareStuffModel.sysdiagram" />
+          <EntitySet Name="Users" EntityType="ShareStuffModel.User" />
+          <FunctionImport Name="usrCheckLogin" EntitySet="Users" ReturnType="Collection(ShareStuffModel.User)">
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <AssociationSet Name="UserLocation" Association="ShareStuffModel.UserLocation">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Location" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="ItemRequest" Association="ShareStuffModel.ItemRequest">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Request" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="UserRequest" Association="ShareStuffModel.UserRequest">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Request" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="LocationRequest" Association="ShareStuffModel.LocationRequest">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Request" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="UserItem" Association="ShareStuffModel.UserItem">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <EntitySet Name="Categories" EntityType="ShareStuffModel.Category" />
+          <AssociationSet Name="CategoryItem" Association="ShareStuffModel.CategoryItem">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="owner_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="condition" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="detail" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="isPublic" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Requests" Relationship="ShareStuffModel.ItemRequest" FromRole="Item" ToRole="Request" />
+          <NavigationProperty Name="User" Relationship="ShareStuffModel.UserItem" FromRole="Item" ToRole="User" />
+          <Property Type="Int32" Name="category_id" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="ShareStuffModel.CategoryItem" FromRole="Item" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="maxUsers" Type="Int32" Nullable="false" />
+          <Property Name="maxTransactions" Type="Int32" Nullable="false" />
+          <Property Name="isPublic" Type="Boolean" Nullable="false" />
+          <Property Name="locationCode" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="isEnabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="ShareStuffModel.UserLocation" FromRole="Location" ToRole="User" />
+          <NavigationProperty Name="Requests" Relationship="ShareStuffModel.LocationRequest" FromRole="Location" ToRole="Request" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="requestor_id" Type="Int32" Nullable="false" />
+          <Property Name="item_id" Type="Int32" Nullable="false" />
+          <Property Name="itemWant" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="isAccepted" Type="Boolean" Nullable="false" />
+          <Property Name="location_id" Type="Int32" Nullable="false" />
+          <Property Name="isCheckedOut" Type="Boolean" Nullable="false" />
+          <Property Name="dateRequested" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dateRecieved" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dateReturned" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dateWantedReturn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="giverRating" Type="Int32" Nullable="false" />
+          <Property Name="recieverRating" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="ShareStuffModel.ItemRequest" FromRole="Request" ToRole="Item" />
+          <NavigationProperty Name="User" Relationship="ShareStuffModel.UserRequest" FromRole="Request" ToRole="User" />
+          <NavigationProperty Name="Location" Relationship="ShareStuffModel.LocationRequest" FromRole="Request" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="reputation" Type="Int32" Nullable="false" />
+          <Property Name="location_id" Type="Int32" Nullable="false" />
+          <Property Name="isFlagged" Type="Boolean" Nullable="false" />
+          <Property Name="isDisabled" Type="Boolean" Nullable="false" />
+          <Property Name="isAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="ShareStuffModel.UserLocation" FromRole="User" ToRole="Location" />
+          <NavigationProperty Name="Requests" Relationship="ShareStuffModel.UserRequest" FromRole="User" ToRole="Request" />
+          <NavigationProperty Name="Items" Relationship="ShareStuffModel.UserItem" FromRole="User" ToRole="Item" />
+        </EntityType>
+        <Association Name="UserLocation">
+          <End Type="ShareStuffModel.User" Role="User" Multiplicity="*" />
+          <End Type="ShareStuffModel.Location" Role="Location" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ItemRequest">
+          <End Type="ShareStuffModel.Item" Role="Item" Multiplicity="1" />
+          <End Type="ShareStuffModel.Request" Role="Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserRequest">
+          <End Type="ShareStuffModel.User" Role="User" Multiplicity="1" />
+          <End Type="ShareStuffModel.Request" Role="Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="requestor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LocationRequest">
+          <End Type="ShareStuffModel.Location" Role="Location" Multiplicity="1" />
+          <End Type="ShareStuffModel.Request" Role="Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserItem">
+          <End Type="ShareStuffModel.User" Role="User" Multiplicity="1" />
+          <End Type="ShareStuffModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="owner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="description" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="isPublic" Nullable="false" />
+          <Property Type="Int32" Name="parent_id" />
+          <NavigationProperty Name="Items" Relationship="ShareStuffModel.CategoryItem" FromRole="Category" ToRole="Item" />
+        </EntityType>
+        <Association Name="CategoryItem">
+          <End Type="ShareStuffModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="ShareStuffModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ShareStuffModelStoreContainer" CdmEntityContainer="ShareStuffEntities">
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="ShareStuffModel.Item">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="owner_id" ColumnName="owner_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="condition" ColumnName="condition" />
+                <ScalarProperty Name="detail" ColumnName="detail" />
+                <ScalarProperty Name="isPublic" ColumnName="isPublic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="ShareStuffModel.Location">
+              <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="maxUsers" ColumnName="maxUsers" />
+                <ScalarProperty Name="maxTransactions" ColumnName="maxTransactions" />
+                <ScalarProperty Name="isPublic" ColumnName="isPublic" />
+                <ScalarProperty Name="locationCode" ColumnName="locationCode" />
+                <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requests">
+            <EntityTypeMapping TypeName="ShareStuffModel.Request">
+              <MappingFragment StoreEntitySet="Requests">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="requestor_id" ColumnName="requestor_id" />
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="itemWant" ColumnName="itemWant" />
+                <ScalarProperty Name="isAccepted" ColumnName="isAccepted" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="isCheckedOut" ColumnName="isCheckedOut" />
+                <ScalarProperty Name="dateRequested" ColumnName="dateRequested" />
+                <ScalarProperty Name="dateRecieved" ColumnName="dateRecieved" />
+                <ScalarProperty Name="dateReturned" ColumnName="dateReturned" />
+                <ScalarProperty Name="dateWantedReturn" ColumnName="dateWantedReturn" />
+                <ScalarProperty Name="giverRating" ColumnName="giverRating" />
+                <ScalarProperty Name="recieverRating" ColumnName="recieverRating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ShareStuffModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ShareStuffModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="reputation" ColumnName="reputation" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="isFlagged" ColumnName="isFlagged" />
+                <ScalarProperty Name="isDisabled" ColumnName="isDisabled" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usrCheckLogin" FunctionName="ShareStuffModel.Store.usrCheckLogin" >
+            <ResultMapping>
+              <EntityTypeMapping TypeName="ShareStuffModel.User">
+                <ScalarProperty Name="id" ColumnName="id" />
+              </EntityTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="ShareStuffModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+                <ScalarProperty Name="isPublic" ColumnName="isPublic" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,99 @@
+﻿@model ShareThings.Models.Request
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Request</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User.email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User.email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Item.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Item.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.itemWant)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.itemWant)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.isAccepted)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.isAccepted)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Location.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Location.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.isCheckedOut)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.isCheckedOut)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.dateRequested)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.dateRequested)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.dateRecieved)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.dateRecieved)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.dateReturned)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.dateReturned)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.dateWantedReturn)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.dateWantedReturn)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.giverRating)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.giverRating)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.recieverRating)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.recieverRating)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

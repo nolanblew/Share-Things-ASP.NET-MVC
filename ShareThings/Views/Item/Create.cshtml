@@ -1,0 +1,114 @@
+﻿@model ShareThings.Models.Item
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <div class="editor-label">
+        <label>Item Name*</label>
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.name, new { @class = "txtInput" })
+        @Html.ValidationMessageFor(model => model.name)
+    </div>
+
+    <div class="editor-label">
+        <label>Description of the Item*</label>
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.description, new { @class = "txtInput" })
+        @Html.ValidationMessageFor(model => model.description)
+    </div>
+
+    <div class="editor-label">
+        <label>Condition of the Item*</label>
+    </div>
+    <div class="editor-field">
+        @{
+            List<SelectListItem> itm = new List<SelectListItem>();
+            itm.Add(new SelectListItem(){
+                Text = "New",
+                Value = "New"
+            });
+            itm.Add(new SelectListItem(){
+                Text = "Like New",
+                Value = "Like New"
+            });
+            itm.Add(new SelectListItem(){
+                Text = "Used",
+                Value = "Used"
+            });
+            itm.Add(new SelectListItem(){
+                Text = "Heavily Used",
+                Value = "Heavily Used"
+            });
+            itm.Add(new SelectListItem(){
+                Text = "Unrecognizable",
+                Value = "Unrecognizable"
+            });
+        }
+        @Html.DropDownListFor(model => model.condition, itm, new { @class = "ddlInput" })
+        @Html.ValidationMessageFor(model => model.condition)
+    </div>
+
+    <div class="editor-label">
+        <label>Condition of the item</label>
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.detail, new { @class = "txtInput" })
+        @Html.ValidationMessageFor(model => model.detail)
+    </div>
+
+    <div class="editor-field">
+        @Html.CheckBoxFor(model => model.isPublic, new { @checked = "checked" }) 
+        <label>Visible to the Public</label>
+        @Html.ValidationMessageFor(model => model.isPublic)
+    </div>
+    
+    <div class="editor-label">
+        <label>Category</label>
+    </div>
+    <div class="editor-field">
+        @{
+            List<SelectListItem> sli = new List<SelectListItem>();
+            List<List<ShareThings.Models.Category>> cats = ViewBag.Categories;
+            foreach (List<ShareThings.Models.Category> ssmodels in cats)
+            {
+                sli.Add(new SelectListItem()
+                {
+                    Text = ssmodels[0].name,
+                    Value = ssmodels[0].id.ToString()
+                });
+                ssmodels.RemoveAt(0);
+                foreach (ShareThings.Models.Category c in ssmodels)
+                {
+                    sli.Add(new SelectListItem()
+                    {
+                        Text = "  -" + c.name,
+                        Value = c.id.ToString()
+                    });
+                }
+            }
+        
+        }        
+        @Html.DropDownListFor(model => model.category_id, sli, new { @class = "ddlInput" })
+    </div>
+
+    <p>
+        <input type="submit" value="Create" />
+    </p>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

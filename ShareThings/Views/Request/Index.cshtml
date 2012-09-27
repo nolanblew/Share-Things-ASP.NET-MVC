@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ShareThings.Models.Request>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    ShareThings.Models.User usr = ViewBag.User;
+    if (usr == ShareThings.Content.SessionThings.LoggedInUser)
+    {
+    <h2>My Requests</h2>
+    }
+    else
+    {
+    <h2>@usr.name's Requests</h2>
+    }     
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="displayThings">
+    <tr>
+        <th>Title
+        </th>
+        <th>Item Wanted
+        </th>
+        <th>Location
+        </th>
+        <th>Date Requested
+        </th>
+        <th>Requested Return Date
+        </th>
+        <th>Accepted
+        </th>
+        <th>Returned
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.itemWant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.name)
+            </td>
+            <td>
+                @item.dateRequested.ToShortDateString()
+            </td>
+            <td>
+                @item.dateWantedReturn.ToShortDateString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isAccepted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isCheckedOut)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.id }) | 
+                @{
+                    if (!item.isAccepted)
+                    {
+                                @Html.ActionLink("Edit", "Edit", new { id = item.id });
+                                <span>|</span>
+                                @Html.ActionLink("Delete", "Delete", new { id = item.id });
+                    }
+                }
+            </td>
+        </tr>
+    }
+
+</table>

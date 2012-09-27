@@ -1,0 +1,64 @@
+﻿@model ShareThings.Models.Location
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Location</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.maxUsers)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.maxUsers)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.maxTransactions)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.maxTransactions)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.isPublic)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.isPublic)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.locationCode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.locationCode)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.isEnabled)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.isEnabled)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

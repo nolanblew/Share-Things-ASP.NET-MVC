@@ -1,0 +1,272 @@
+﻿body {
+    font-size: .85em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    background-color: #808080;
+    margin-top: auto;
+}
+
+header, footer, nav, section {
+    display: block;
+}
+
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea {
+    min-height: 75px;
+}
+
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.editor-field {
+    margin: 0.5em 0 0 0;
+}
+
+.display-label {
+    font-size: 18px;
+    margin-top: 20px;
+    font-weight: bolder;
+}
+
+.display-field {
+    font-size: 18px;
+    margin-top: 3px;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+
+/* Styles for Admin Panel
+--------------------------------------------------------------*/
+.allContent {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.head {
+    height: 90px;
+    color: white;
+    background-color: #1076bc;
+    font-family: 'Segoe Print';
+    font-size: 36px;
+    vertical-align: middle;
+    padding-left: 35px;
+    padding-top: 30px;
+}
+
+.headMenu {
+    height: 40px;
+    background-color: #25aae1;
+    vertical-align: central;
+    text-align: center;
+    padding: 0px;
+}
+
+.headMenuItem {
+    display: inline-block;
+    height: 40px;
+    color: white;
+    font-size: 22px;
+    padding-left: 7px;
+    padding-right: 7px;
+    vertical-align: middle;
+}
+
+    .headMenuItem a:link {
+        color: white;
+        text-decoration: none;
+    }
+
+    .headMenuItem a:hover {
+        color: white;
+        text-decoration-style: none;
+    }
+
+    .headMenuItem a:active {
+        color: #1076bc;
+        text-decoration-style: none;
+        background-color: #e8eef1;
+    }
+
+    .headMenuItem:hover {
+        background-color: #1076bc;
+    }
+
+    .headMenuItem:active {
+        background-color: #e8eef1;
+    }
+
+    .headMenuItem a:visited {
+        color: white;
+        text-decoration: none;
+    }
+
+.content {
+    text-align: center;
+    background-color: #f3f3f4;
+    padding: 5px 15px 5px 5px;
+}
+
+.footer {
+    background-color: #1076bc;
+    height: 35px;
+    font-size: 18px;
+}
+
+a:link {
+    text-decoration: none;
+    color: #1076bc;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #25aae1;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #1076bc;
+}
+
+/* Styles for input
+------------------------------------ */
+
+body {
+    font-family: 'Segoe UI';
+}
+
+label {
+    font-size: 18px;
+    margin-bottom: 3px;
+}
+
+input {
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+.txtInput {
+    color: #021726;
+    border-color: #1076bc;
+    border-width: thin;
+    min-height: 27px;
+    border-radius: 4px;
+    width: 260px;
+    padding-left: 7px;
+}
+
+.ddlInput {
+    color: #021726;
+    border-color: #1076bc;
+    border-width: thin;
+    height: 35px;
+    border-radius: 4px;
+    width: 260px;
+    padding-left: 7px;
+}
+
+/* Styles for Tables
+-----------------------------*/
+
+.displayThings {
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+    border-width: thin;
+    border-color: #1076bc;
+    border-style: solid;
+}
+
+    .displayThings tr {
+        border-width: thin;
+        border-color: #1076bc;
+        border-style: solid;
+    }
+
+    .displayThings td {
+        margin-left: 5px;
+        margin-right: 15px;
+        text-align: left;
+        padding-left: 5px;
+    }
+
+    .displayThings th {
+        margin-left: 5px;
+        margin-right: 5px;
+        text-align: left;
+        background-color: #25aae1;
+        color: white;
+        padding: 3px;
+    }
+
+/* Styles for the Sidebar
+------------------------------ */
+
+.requestItem {
+    border: solid;
+    border-width: 1px;
+    border-color: #1076bc;
+    border-radius: 8px;
+    width: 450px;
+    padding: 3px;
+    margin-top: 4px;
+    margin-bottom: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(38, 170, 224, 0.12);
+}
+
+    .requestItem table {
+        width: 90%;
+    }
+
+    .requestItem th {
+        text-align: right;
+        padding-right: 5px;
+    }
+
+    .requestItem td {
+        padding-left: 5px;
+        text-align: left;
+    }
+
+        .requestItem td input {
+            font-size: 14px;
+        }

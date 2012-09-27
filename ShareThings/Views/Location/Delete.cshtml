@@ -1,0 +1,67 @@
+﻿@model ShareThings.Models.Location
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Location</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.maxUsers)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.maxUsers)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.maxTransactions)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.maxTransactions)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.isPublic)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.isPublic)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.locationCode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.locationCode)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.isEnabled)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.isEnabled)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
